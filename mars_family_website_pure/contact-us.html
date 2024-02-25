@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript"
+        src="https://api.map.baidu.com/api?v=3.0&ak=zGwSoaTrd2LlPn7I7WEBceSV6WyU3dEW"></script>
+    <link rel="stylesheet" href="./css/contact-us.css">
+
+    <title>联系我们</title>
+</head>
+
+<body>
+    <div id="header">
+        <div id="contact-title">联系我们</div>
+        <div id="contact-details">
+            <p>地址：包头市青山区邻圃道兵工佳苑东南侧亿佰盛写字楼4楼163室</p>
+            <p>联系电话：123-456-7890</p>
+        </div>
+    </div>
+
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+
+    <script type="text/javascript">
+        // 百度地图API初始化代码
+        var map = new BMap.Map("map");
+        var point = new BMap.Point(109.878653, 40.690027);
+
+        // 创建标注
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker);
+
+        // 设置地图中心和缩放级别
+        map.centerAndZoom(point, 15);
+
+        // 创建信息窗口
+        var infoWindow = new BMap.InfoWindow('<div style="line-height: 1.2em; font-size: 12px; padding: 3px;">' +
+            '<h2 style="color:#cd5a28;">火星家族</h2>' +
+            '<p>地址：包头市青山区邻圃道兵工佳苑东南侧亿佰盛</p>' +
+            '<p>写字楼4楼163室</p>' +
+            '</div>');
+
+        // 绑定信息窗口到标注
+        marker.addEventListener('click', function () {
+            this.openInfoWindow(infoWindow);
+        });
+
+        // 在地图加载完毕后打开信息窗口
+        map.addEventListener('tilesloaded', function () {
+            marker.openInfoWindow(infoWindow);
+        });
+
+        // 将地图中心移动到定位点
+        map.panTo(point);
+    </script>
+</body>
+
+</html>
